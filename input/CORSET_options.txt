@@ -1,0 +1,117 @@
+scenario = scenario1_100y
+
+#########################################################################
+# General options
+
+# Region
+# 0 -- MAR (Meso-American Reef)
+# 1 -- SCS (South China Sea)
+# 2 -- User-defined region
+region = 0
+
+# Spatial resolution (cell size): 'res' x 'res' km
+# Only needs to be selected for MAR and SCS instantiations of CORSET
+# MAR -- 1 or 2 (default)
+# SCS -- 1 or 3 (default)
+res_MAR = 1
+res_SCS = 3
+
+#########################################################################
+# Simulation options
+
+years = 200 # Number of years to run simulation
+equilibration = 5 # Number of equilibration years (not included in output) 2-5 years
+runs = 10 # Number of Monte Carlo runs
+seed = 0 # Random number seed
+
+# Initial values
+# Only needs to be selected for MAR and SCS instantiations of CORSET
+# 0 -- Current reef state (approximate)
+# 1 -- Healthy reef state
+initial_vals = 1
+
+#########################################################################
+# Forcing options
+
+# Hurricane/typhoon forcing
+# 0 -- no forcing
+# 1 -- all reef cells in a random number of subregions are affected 
+#      by each hurricane event: hurricane severity is random
+# 2 -- all reef cells in a random number of subregions are affected 
+#      by each hurricane event: hurricane severity increases through time
+# 3 -- years during which hurricanes occur, the affected subregions, and
+#      the strength of each hurricane is specified: input from file
+forc_hurr = 0
+# Sub-options for hurrican/typhoon forcing options 1 and 2
+hfreq = 3 # Long-term average hurricane/typhoon frequency (years)	   
+hmax_sr = 2 # Maximum number of subregions affected by each hurricane/typhoon
+hmin_cat = 1 # Minimum category for hurricanes/typhoons	
+hmax_cat = 5 # Maximum category for hurricanes/typhoons
+
+# Coral mortality forcing
+# 0 -- no forcing
+# 1 -- all reef cells in a random number of subregions are affected
+#      by each mortality event
+# 2 -- years during which mortality events occur, the affected subregions,
+#      and the severity of each event is specified: input from file
+# 3 -- the location of mortality-susceptible cells is specified: input from
+#      file (can only be implemented for default MAR and SCS resolutions)
+# 4 -- change threat levels after the first 100 years 
+forc_cm = 1
+
+# Sub-options for coral mortality forcing options 1 and 3
+cmfreq = 20 # Long-term average frequency for coral mortality events (years)
+cmfreq2 = 20 # Average frequency of coral mortality events after 100 years (years)
+# Sub-options for coral mortality forcing option 1
+cmmax_sr = 5 # The maximum number of subregions affect by each event
+
+# Fishing pressure
+# 0 -- fishing pressure is zero
+# 1 -- fishing pressure is selected at random from the specified range
+# 2 -- changes in fishing pressure are specified for each subregion:
+#      input from file
+# 3 -- the location of MPAs is specified: input from file
+#      (can only be implemented for default MAR and SCS resolutions)
+# 4 -- fishing pressure is selected at random from the specified range
+#      but changes after 100 years. Only works in MAR.
+forc_fish = 1
+
+# Sub-options for fishing pressure options 1 and 3
+fmin_MAR = 80 # Minimum fishing pressure for the MAR region (kg/km2/yr)
+fmax_MAR = 2540 # Maximum fishing pressure for the MAR region (kg/km2/yr)
+
+fmin_MAR2 = 80 # Minimum fishing pressure for the MAR region (kg/km2/yr) after 100 years
+fmax_MAR2 = 2540 # Maximum fishing pressure for the MAR region (kg/km2/yr) after 100 years
+
+fmin_SCS = 0 # Minimum fishing pressure for the SCS region (kg/km2/yr)
+fmax_SCS = 20000 # Maximum fishing pressure for the SCS region (kg/km2/yr)
+fmin_user = 0 # Minimum fishing pressure for user-defined region (kg/km2/yr)
+fmax_user = 5000 # Maximum fishing pressure for user-defined region (kg/km2/yr)
+
+# Destructive fishing
+# 0 -- no forcing
+# 1 -- changes in the proportion of cells affected by destructive fishing is
+#      specified for each subregion: input from file
+#      (option 1 is only implemented for the SCS region and should only
+#      be used where forc_fish > 0)
+forc_df = 0
+
+# Nutrification forcing
+# 0 -- no forcing
+# 1 -- changes in the proportion of cells affected by nutrification forcing is
+#      specified for each subregion: input from file
+# 2 -- the location of affected reef cells is specified, together with the
+#      years during which these cells are under nutrification forcing:
+#      input from file (can only be implemented for default MAR and SCS 
+#      resolutions)
+forc_nut = 0
+
+# Sedimentation forcing
+# 0 -- no forcing
+# 1 -- changes in the proportion of cells affected by sedimentation forcing is
+#      specified for each subregion: input from file
+# 2 -- the location of affected reef cells is specified, together with the
+#      years during which these cells are under sedimentation forcing:
+#      input from file (can only be implemented for default MAR and SCS 
+#      resolutions)
+forc_sed = 0
