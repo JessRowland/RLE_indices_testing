@@ -1,0 +1,18 @@
+egional-scale biophysical model version with user defined
+updating interval.
+
+Initial conditions vary between subregions. 
+Transition matrices are from larval dispersal models.
+
+Model output is in NetCDF (CF standards) and comma delimited
+text formats.
+
+The units for model input and output are % cover for benthic groups and 
+kg/km^2 for consumer groups.
+
+Required external Python packages:
+matplotlib
+numpy
+scientific (for netcdf output)
+
+JMT -- May 2015
