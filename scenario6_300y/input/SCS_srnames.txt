@@ -1,0 +1,6 @@
+Subregion,Name
+1,Ilocos-Luzon
+2,Mindoro
+3,Palawan-W
+4,Palawan-E
+5,Kalayaan-Is
