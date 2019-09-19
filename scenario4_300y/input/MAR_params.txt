@@ -1,0 +1,66 @@
+benthic parameters
+r_C,0.04,0.2
+alpha_C,0,1
+d_C,0.02,0.1
+epsilon_C,0.05,0.15
+zeta_T,2,20
+g_T,5,15
+beta_M,0.4,0.9
+r_M,0.05,0.4
+g_M,0.05,15
+gamma_MC,0,0.9
+gamma_MT,0,0.9
+
+consumer parameters
+d_H,0.2,2
+lambda_H,0.8
+phi_Ps,0,10
+r_Ps,0.035,0.1
+g_Ps,1,2
+d_Ps,0.2,2
+r_Pl,0.03,0.09
+g_Pl,0.25,0.75
+psi_Pl,2,4
+d_Pl,0.07,0.9
+kappa_U,1,10
+d_U,0.3,1
+q_U,1E-006
+
+scale-dependent parameters
+mu_M,60,1E+005
+mu_T,60,1E+005
+mu_E,60,1E+005
+i_H,3E+003,5E+005
+i_U,2E+003,3E+006
+i_PH,7E+003,1E+004
+i_PlPs,7E+003,1E+004
+i_FH,7E+002,1E+003
+i_FPs,7E+002,1E+003
+i_FPl,7E+002,1E+003
+
+recruitment parameters
+l_C,2E+009,6E+009
+l_H,2E+003,4E+003
+l_Ps,3E+002,5E+002
+l_Pl,7E+002,9E+002
+l_U,7E+002,9E+002
+dlarv_Cb,0.6,0.99
+drec_C,0.2,0.7
+drec_F,0.2
+drec_U,0.2
+arec_C,2.18E-010
+brec_H,0.08
+brec_P,0.15
+brec_U,0.01
+
+forcing parameters
+hdam_C,0.002,0.7
+hdam_M,0,0.9
+cm_C,0.2,0.6
+dfdam_C,0.004,0.032
+rnut_M,2,7
+lnut_C,0.75,1.0
+rsed_C,0.7
+dsed_C,0,0.2
+drecsed_C,0.4
+epsilonsed_C,0
