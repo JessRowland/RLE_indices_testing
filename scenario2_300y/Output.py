@@ -77,7 +77,7 @@ class Output:
 
     def writeLogF(self,pathname,params,forcing_f,forcing_nut,forcing_sed,
 	forcing_hurr,forcing_cm,forcing_df,pfile,ivfile,ffile,nfile,sfile,hfile,
-	cmfile,dffile,hlog_cat,hlog_sr,cmlog_sr,runf):
+	cmfile,dffile,hlog_cat,hlog_sr,cmlog_sr,flog,runf):
 	"""Write forcing log."""
         outfile = open(pathname, 'w')
 	print >>outfile,\
@@ -88,44 +88,46 @@ class Output:
 	forcing_cm.opt == 0 and forcing_df.opt == 0:
 	    print >>outfile,"no forcings"
 	else:
-	    print >>outfile,"seed for forcings: %d" %params.seed
+	    print >>outfile," seed for forcings: %d\n" %params.seed
 	    if forcing_nut.opt != 0:
 		print >>outfile,"nutrification forcing (option %d)," \
 		%forcing_nut.opt,
-		print >>outfile,"input: %s" %nfile
+		print >>outfile,"input: %s\n" %nfile
 	    if forcing_sed.opt != 0:
 		print >>outfile,"sedimentation forcing (option %d)," \
 		%forcing_sed.opt,
-		print >>outfile,"input: %s" %sfile
+		print >>outfile,"input: %s\n" %sfile
 	    if forcing_hurr.opt == 1 or forcing_hurr.opt == 2:
 		print >>outfile,"hurricane forcing (option %d)," \
 		%forcing_hurr.opt,
-		print >>outfile,"no input"
+		print >>outfile,"no input\n"
 	    elif forcing_hurr.opt == 3:
 		print >>outfile,"hurricane forcing (option %d)," \
 		%forcing_hurr.opt,
-		print >>outfile,"input: %s" %hfile
+		print >>outfile,"input: %s\n" %hfile
 	    if forcing_cm.opt == 1:
 		print >>outfile,"coral mortality forcing (option %d)," \
 		%forcing_cm.opt,
-		print >>outfile,"no input"
+		print >>outfile,"no input\n"
 	    elif forcing_cm.opt > 1:
 		print >>outfile,"coral mortality forcing (option %d)," \
 		%forcing_cm.opt,
-		print >>outfile,"input: %s" %cmfile
+		print >>outfile,"input: %s\n" %cmfile
 	    if forcing_df.opt == 1:
 		print >>outfile,"destructive fishing forcing (option %d)," \
 		%forcing_f.opt,
-		print >>outfile,"input: %s" %dffile
+		print >>outfile,"input: %s\n" %dffile
 	    if forcing_f.opt == 1:
-		print >>outfile,"fishing forcing (option %d)" %forcing_f.opt
+		print >>outfile,"fishing forcing (option %d)\n" %forcing_f.opt
 	    if forcing_f.opt > 1:
 		print >>outfile,"fishing forcing (option %d)," %forcing_f.opt,
-		print >>outfile,"input: %s" %ffile
+		print >>outfile,"input: %s\n" %ffile
 
 	    for r in range(runf):
 		if forcing_hurr.opt == 1 or forcing_hurr.opt == 2 or\
-		   forcing_cm.opt == 1 or forcing_cm.opt == 3 or forcing_cm.opt == 4:
+		   forcing_cm.opt == 1 or forcing_cm.opt == 3 or\
+            forcing_cm.opt == 4 or\ forcing_f.opt 1 or\
+            forcing_f.opt == 4:
 		    print >>outfile,"\nRun %d" %(r+1)
 		    if forcing_hurr.opt == 1 or forcing_hurr.opt == 2:
 			if len(hlog_sr[r].keys()) == 0:
@@ -157,6 +159,11 @@ class Output:
 			else:
 			    for i in sort(cmlog_sr[r].keys()):
 				print >>outfile,"coral mortality: year %d" %i
+            if forcing_f.opt == 1 or forcing_f.opt == 4:
+                with open('fishing_pressure.txt', 'w') as f:
+                    print >> f, "run %d: " %r
+                    for pressure in flog:
+                        print >> f, "%d, " %pressure
 		else:
 		    break
         outfile.close()
