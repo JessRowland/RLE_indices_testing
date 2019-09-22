@@ -762,7 +762,7 @@ def Simulate():
    # Lists and dictionaries to catch model results
    defectruns = []
    mcavs = {}; mcCIs = {}; mcavsSR = {}; mcCIsSR = {}; cellavs = {}
-   hlog_cat = []; hlog_sr = []; cmlog_sr = []
+   hlog_cat = []; hlog_sr = []; cmlog_sr = []; flog = []
    coralmaps = [[]  for run in range(params.runs)]
    for var in variables:
       mcavs[var] = []; mcCIs[var] = []; mcavsSR[var] = []; mcCIsSR[var] = []
@@ -791,7 +791,7 @@ def Simulate():
               cellavs[var].append(model.modelout[var][-1])
           coralmaps[run] = model.modelout['C']
           hlog_cat.append(model.hlog_cat); hlog_sr.append(model.hlog_sr)
-          cmlog_sr.append(model.cmlog_sr)
+          cmlog_sr.append(model.cmlog_sr); flog.append(model.flog)
    tend = time.time()
    timing = tend - tstart
 
@@ -804,6 +804,7 @@ def Simulate():
    p = open('_pickle/hlog_cat','w'); pickle.dump(hlog_cat,p); p.close()
    p = open('_pickle/hlog_sr','w'); pickle.dump(hlog_sr,p); p.close()
    p = open('_pickle/cmlog_sr','w'); pickle.dump(cmlog_sr,p); p.close()
+   p = open('_pickle/flog', 'w'); pickle.dump(flog,p); p.close()
    p = open('_pickle/defectruns','w'); pickle.dump(defectruns,p); p.close()
    p = open('_pickle/timing','w'); pickle.dump(timing,p); p.close()
    p = open('_pickle/coralmaps', 'w'); pickle.dump(coralmaps, p); p.close()
@@ -830,6 +831,7 @@ def Outputs(inputpath,outputpath):
    p = open('_pickle/hlog_cat','r'); hlog_cat = pickle.load(p); p.close()
    p = open('_pickle/hlog_sr','r'); hlog_sr = pickle.load(p); p.close()
    p = open('_pickle/cmlog_sr','r'); cmlog_sr = pickle.load(p); p.close()
+   p = open('_pickle/flog', 'r'); flog = pickle.load(p); p.close()
    p = open('_pickle/defectruns','r'); defectruns = pickle.load(p); p.close()
    p = open('_pickle/timing','r'); timing = pickle.load(p); p.close()
    p = open('_pickle/coralmaps', 'r'); coralmaps = pickle.load(p); p.close()
@@ -840,6 +842,7 @@ def Outputs(inputpath,outputpath):
    pathspatial = outputpath + scenario + '_spatial'
    pathlog = outputpath + scenario + '_log.txt'
    pathlogF = outputpath + scenario + '_logF.txt'
+   pathlog_fishing = outputpath + scenario + '_fishing_pressure.txt'
    pathparamsout = outputpath + scenario + '_params.txt'
    pathoptionsout = outputpath + scenario + '_options.txt'
    pathcoralmap = outputpath + scenario + '_coralmap'
@@ -855,11 +858,12 @@ def Outputs(inputpath,outputpath):
    output.meansSRCDF(pathmeansSR,reefmap,params,variables,runf,mcavsSR)
    output.writeLog(pathlog,version,scenario,params,reefmap,
    filenames['paramfile'],filenames['ivfile'],timing,defectruns)
-   output.writeLogF(pathlogF,params,forcing_f,forcing_nut,forcing_sed,
+   output.writeLogF(pathlogF,pathlog_fishing,
+   params,forcing_f,forcing_nut,forcing_sed,
    forcing_hurr,forcing_cm,forcing_df,
    filenames['paramfile'],filenames['ivfile'],filenames['ffile'],
    filenames['nfile'],filenames['sfile'],filenames['hfile'],
-   filenames['cmfile'],filenames['dffile'],hlog_cat,hlog_sr,cmlog_sr,runf)
+   filenames['cmfile'],filenames['dffile'],hlog_cat,hlog_sr,cmlog_sr,flog,runf)
    output.coralmapTXT(pathcoralmap,reefmap,coralmaps,100)
    #output.writeParams(pathparamsout,filenames['paramfile'])
    #output.writeParams(pathoptionsout,inputpath + '/CORSET_options.txt')
