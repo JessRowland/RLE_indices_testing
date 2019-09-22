@@ -842,6 +842,7 @@ def Outputs(inputpath,outputpath):
    pathspatial = outputpath + scenario + '_spatial'
    pathlog = outputpath + scenario + '_log.txt'
    pathlogF = outputpath + scenario + '_logF.txt'
+   pathlog_fishing = outputpath + scenario + '_fishing_pressure.txt'
    pathparamsout = outputpath + scenario + '_params.txt'
    pathoptionsout = outputpath + scenario + '_options.txt'
    pathcoralmap = outputpath + scenario + '_coralmap'
@@ -857,7 +858,8 @@ def Outputs(inputpath,outputpath):
    output.meansSRCDF(pathmeansSR,reefmap,params,variables,runf,mcavsSR)
    output.writeLog(pathlog,version,scenario,params,reefmap,
    filenames['paramfile'],filenames['ivfile'],timing,defectruns)
-   output.writeLogF(pathlogF,params,forcing_f,forcing_nut,forcing_sed,
+   output.writeLogF(pathlogF,pathlog_fishing,
+   params,forcing_f,forcing_nut,forcing_sed,
    forcing_hurr,forcing_cm,forcing_df,
    filenames['paramfile'],filenames['ivfile'],filenames['ffile'],
    filenames['nfile'],filenames['sfile'],filenames['hfile'],

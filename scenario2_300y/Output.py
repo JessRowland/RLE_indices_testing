@@ -75,7 +75,8 @@ class Output:
         print >>outfile,"runtime: %d seconds" %(timing)
         outfile.close()
 
-    def writeLogF(self,pathname,params,forcing_f,forcing_nut,forcing_sed,
+    def writeLogF(self,pathname,fishingpath,
+    params,forcing_f,forcing_nut,forcing_sed,
 	forcing_hurr,forcing_cm,forcing_df,pfile,ivfile,ffile,nfile,sfile,hfile,
 	cmfile,dffile,hlog_cat,hlog_sr,cmlog_sr,flog,runf):
 	"""Write forcing log."""
@@ -160,7 +161,7 @@ class Output:
 			    for i in sort(cmlog_sr[r].keys()):
 				print >>outfile,"coral mortality: year %d" %i
             if forcing_f.opt == 1 or forcing_f.opt == 4:
-                with open('fishing_pressure.txt', 'w') as f:
+                with open(fishingpath, 'w') as f:
                     print >> f, "run %d: " %r
                     for pressure in flog:
                         print >> f, "%d, " %pressure
