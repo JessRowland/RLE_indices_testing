@@ -62,6 +62,7 @@ class Simulation:
         self.hlog_sr = {}
         self.hlog_cat = {}
         self.cmlog_sr = {}
+        self.flog = {}
 
         # Set initial conditions
         self.C = [[]]; self.Cb = [[]]; self.Cs = [[]]; self.T = [[]]
@@ -470,6 +471,10 @@ class Simulation:
                                 fishing = self.p['f']*reefmap.cell_area
                             else:
                                 fishing = self.p['f2']*reefmap.cell_area
+
+            # Creating fishing log
+            self.flog[year] = fishing
+
 		    if ii == 0:
 		        rho_H[r] = H[0][r]/(H[0][r]+Ps[0][r]+Pl[0][r])
 			rho_Ps[r] = Ps[0][r]/(H[0][r]+Ps[0][r]+Pl[0][r])
