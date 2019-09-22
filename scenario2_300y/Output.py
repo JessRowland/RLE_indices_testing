@@ -162,7 +162,7 @@ class Output:
 				print >>outfile,"coral mortality: year %d" %i
             if forcing_f.opt == 1 or forcing_f.opt == 4:
                 with open(fishingpath, 'w') as f:
-                    print >> f, "run %d: " %r
+                    print >> f, "\nrun %d: " %r
                     for pressure in flog:
                         print >> f, "%d, " %pressure
 		else:
