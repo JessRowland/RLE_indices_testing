@@ -125,7 +125,7 @@ class Output:
 
 	    for r in range(runf):
 		if forcing_hurr.opt == 1 or forcing_hurr.opt == 2 or\
-		   forcing_cm.opt == 1 or forcing_cm.opt == 3:
+		   forcing_cm.opt == 1 or forcing_cm.opt == 3 or forcing_cm.opt == 4:
 		    print >>outfile,"\nRun %d" %(r+1)
 		    if forcing_hurr.opt == 1 or forcing_hurr.opt == 2:
 			if len(hlog_sr[r].keys()) == 0:
@@ -140,7 +140,7 @@ class Output:
 				else:
 				    print >>outfile,\
 				    "subregions %s" %str(sort(hlog_sr[r][i]))
-		    if forcing_cm.opt == 1:
+		    if forcing_cm.opt == 1 or forcing_cm.opt == 4:
 			if len(cmlog_sr[r].keys()) == 0:
 			    print >>outfile,"no coral mortality events"
 			else:
